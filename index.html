@@ -114,7 +114,7 @@
         /* === PRINT TO A4 – ONE PAGE === */
         @media print {
             /* Force A4 page and tighter margins */
-            @page { size: A4 portrait; margin: 10mm 12mm; }
+            @page { size: A4 portrait; margin: 6mm 8mm; }
 
             html, body { width: 210mm; height: auto; background: #fff !important; }
             * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
@@ -123,62 +123,52 @@
             *, *::before, *::after { animation: none !important; transition: none !important; filter: none !important; }
             body::before, .resume-container::before, .header::before, .professional-summary::before, .professional-summary::after, .sidebar::before, .main-section::before, .job::before, .job::after { display: none !important; }
 
-            body { padding: 0 !important; font-size: 9.5pt !important; line-height: 1.35 !important; }
+            body { padding: 0 !important; font-size: 9pt !important; line-height: 1.3 !important; }
 
+            /* SCALE-TO-FIT (Chrome/WebKit friendly) */
             .resume-container {
                 box-shadow: none !important;
                 border-radius: 0 !important;
-                max-width: none !important;
-                width: 100% !important;
-                background: #fff !important;
-                backdrop-filter: none !important;
-                border: none !important;
-                display: block !important;
+                background: #fff !important; backdrop-filter: none !important; border: none !important;
+                /* Scale down and compensate width so it still fills A4 width */
+                transform: scale(0.86);
+                transform-origin: top left;
+                width: calc(210mm / 0.86);
+                overflow: visible !important;
+                page-break-after: avoid !important; break-after: avoid !important;
             }
 
-            .header {
-                background: #2c3e50 !Important;
-                padding: 10mm 0 6mm 0 !important; /* mm for reliable print spacing */
-                border: none !important;
-            }
-            .name { font-size: 18pt !important; margin-bottom: 2mm !important; font-weight: 700 !important; color: #fff !important; }
-            .title { font-size: 11pt !important; margin-bottom: 3mm !important; color: #e8eef5 !important; }
-            .contact-info { font-size: 8.5pt !important; gap: 6mm !important; margin-top: 0 !important; flex-wrap: nowrap !important; justify-content: center !important; }
+            .header { background: #2c3e50 !Important; padding: 8mm 0 5mm 0 !important; border: none !important; }
+            .name { font-size: 17pt !important; margin-bottom: 1.5mm !important; font-weight: 700 !important; color: #fff !important; }
+            .title { font-size: 10.5pt !important; margin-bottom: 2mm !important; color: #e8eef5 !important; }
+            .contact-info { font-size: 8pt !important; gap: 5mm !important; margin-top: 0 !important; flex-wrap: nowrap !important; justify-content: center !important; white-space: nowrap !important; }
             .contact-icon, svg { display: none !important; }
 
-            .professional-summary {
-                background: #f6f7fb !important;
-                padding: 6mm !important;
-                margin: 5mm 0 5mm 0 !important;
-                border: 0.3mm solid #667eea !important;
-                border-radius: 2mm !important;
-                box-shadow: none !important;
-            }
-            .professional-summary p { color: #2c3e50 !important; font-size: 10pt !important; line-height: 1.4 !important; -webkit-text-fill-color: initial !important; background: none !important; font-weight: 600 !important; }
+            .professional-summary { background: #f6f7fb !important; padding: 5mm !important; margin: 4mm 0 !important; border: 0.3mm solid #667eea !important; border-radius: 2mm !important; box-shadow: none !important; }
+            .professional-summary p { color: #2c3e50 !important; font-size: 9.5pt !important; line-height: 1.35 !important; -webkit-text-fill-color: initial !important; background: none !important; font-weight: 600 !important; }
 
-            .main-content { display: grid !important; grid-template-columns: 58mm 1fr !important; gap: 5mm !important; min-height: auto !important; padding: 0 !important; }
+            .main-content { display: grid !important; grid-template-columns: 52mm 1fr !important; gap: 4mm !important; min-height: auto !important; padding: 0 !important; }
+            .sidebar { background: #fafbfc !important; padding: 4mm 3.5mm !important; border-right: 0.2mm solid #ddd !important; }
+            .main-section { background: #fff !important; padding: 4mm 5mm !important; }
 
-            .sidebar { background: #fafbfc !important; padding: 5mm 4mm !important; border-right: 0.2mm solid #ddd !important; }
-            .main-section { background: #fff !important; padding: 5mm 6mm !important; }
+            .section { margin-bottom: 4mm !important; }
+            .section-title { color:#2c3e50 !important; font-size: 10pt !important; margin-bottom: 2mm !important; font-weight: 800 !important; padding-bottom: 1mm !important; }
+            .section-title::after { background: #667eea !important; width: 18mm !important; height: 0.6mm !important; }
 
-            .section { margin-bottom: 5mm !important; }
-            .section-title { color:#2c3e50 !important; font-size: 10.5pt !important; margin-bottom: 2.5mm !important; font-weight: 800 !important; padding-bottom: 1.5mm !important; }
-            .section-title::after { background: #667eea !important; width: 20mm !important; height: 0.6mm !important; }
-
-            .skills-grid { gap: 1.5mm !important; }
-            .skill-item { background: #fff !important; padding: 2.5mm 3mm !important; border: none !important; border-left: 1mm solid #667eea !important; border-radius: 0 !important; box-shadow: none !important; font-size: 8.5pt !important; line-height: 1.3 !important; break-inside: avoid !important; page-break-inside: avoid !important; }
+            .skills-grid { gap: 1mm !important; }
+            .skill-item { background: #fff !important; padding: 2mm 2.5mm !important; margin-bottom: 1mm !important; border: none !important; border-left: 0.9mm solid #667eea !important; border-radius: 0 !important; box-shadow: none !important; font-size: 8pt !important; line-height: 1.25 !important; break-inside: avoid !important; page-break-inside: avoid !important; }
             .skill-item strong { color:#2c3e50 !important; -webkit-text-fill-color: initial !important; background: none !important; font-weight: 800 !important; }
 
-            .languages { gap: 1.5mm !important; }
-            .language-item { padding: 0 !important; border: none !important; font-size: 8.5pt !important; break-inside: avoid !important; page-break-inside: avoid !important; }
-            .language-level { background:#667eea !important; color:#fff !important; font-size: 7.5pt !important; padding: 1mm 3mm !important; border-radius: 10mm !important; }
+            .languages { gap: 1mm !important; }
+            .language-item { padding: 0 !important; border: none !important; font-size: 8pt !important; break-inside: avoid !important; page-break-inside: avoid !important; }
+            .language-level { background:#667eea !important; color:#fff !important; font-size: 7pt !important; padding: 0.8mm 2.5mm !important; border-radius: 10mm !important; }
 
-            .job { background: #fff !important; padding: 3mm 3mm 3mm 5mm !important; margin-bottom: 3mm !important; border: none !important; border-left: 1.2mm solid #667eea !important; border-radius: 0 !important; box-shadow: none !important; break-inside: avoid !important; page-break-inside: avoid !important; }
-            .job-title { color:#2c3e50 !important; font-size: 10pt !important; font-weight: 800 !important; margin-bottom: 1.5mm !important; -webkit-text-fill-color: initial !important; background: none !important; }
-            .company { color:#3949ab !important; font-size: 9pt !important; font-weight: 700 !important; margin-bottom: 1.5mm !important; -webkit-text-fill-color: initial !important; background: none !important; }
-            .duration { font-size: 8pt !important; color:#666 !important; margin-bottom: 2mm !important; font-style: italic !important; }
+            .job { background: #fff !important; padding: 2.5mm 2.5mm 2.5mm 4mm !important; margin-bottom: 2.2mm !important; border: none !important; border-left: 1mm solid #667eea !important; border-radius: 0 !important; box-shadow: none !important; break-inside: avoid !important; page-break-inside: avoid !important; }
+            .job-title { color:#2c3e50 !important; font-size: 9.5pt !important; font-weight: 800 !important; margin-bottom: 1.2mm !important; -webkit-text-fill-color: initial !important; background: none !important; }
+            .company { color:#3949ab !important; font-size: 8.8pt !important; font-weight: 700 !important; margin-bottom: 1.2mm !important; -webkit-text-fill-color: initial !important; background: none !important; }
+            .duration { font-size: 7.8pt !important; color:#666 !important; margin-bottom: 1.6mm !important; font-style: italic !important; }
             .job-description { margin: 0 !important; }
-            .job-description p { font-size: 8.5pt !important; line-height: 1.35 !important; margin-bottom: 1.5mm !important; color:#333 !important; }
+            .job-description p { font-size: 8pt !important; line-height: 1.3 !important; margin-bottom: 1mm !important; color:#333 !important; }
             .job-description p:last-child { margin-bottom: 0 !important; }
 
             /* Keep on a single page as much as possible */
@@ -186,11 +176,7 @@
 
             /* Avoid widows/orphans for better typography */
             p { orphans: 3; widows: 3; }
-
-            /* Compact the header contact row so it never wraps to a second line too tall */
-            .contact-info { white-space: nowrap !important; }
-        }
-    </style>
+        }</style>
 </head>
 <body>
     <div class="resume-container">
